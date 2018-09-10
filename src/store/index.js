@@ -1,10 +1,12 @@
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import reducers from '../reducers/index';
-import { getCountries } from '../actions/actions-countries';
+const enhancers = [];
+if (window.devToolsExtension) {
+  enhancers.push(window.devToolsExtension());
+}
+//import { getCountries } from '../actions/actions-countries';
 
 
-const store = createStore(reducers);
-
-store.dispatch(getCountries());
+const store = createStore(reducers, [], compose(...enhancers));
 
 export default store;
